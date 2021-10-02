@@ -16,11 +16,17 @@ public class Draggable : MonoBehaviour
 
 	public Vector3 force;
 
+	public float velocityThreshold = 0.05f;
+
 	private Rigidbody2D rb;
 
 	public float RotateSpeed = 10.0f;
 
 	private float rotationAngle;
+
+	private Bounds bound;
+
+	private bool isMoving = false;
 
 	private void Start()
 	{
@@ -58,26 +64,54 @@ public class Draggable : MonoBehaviour
 
 	public void FixedUpdate()
 	{
-		if(follow || isThrown)
+		if (follow || isThrown)
 		{
-			rb.velocity = force* 100;
+			rb.velocity = force * 100;
 			isThrown = false;
 		}
 	}
 
 	public void Update()
 	{
-		if(follow)
+		if (follow)
 		{
 			rotationAngle += Input.mouseScrollDelta.y * RotateSpeed;
 			if (rotationAngle > 360f) rotationAngle -= 360f;
 			rb.MoveRotation(rotationAngle);
 		}
+
+		if (!follow)
+		{
+			//slow?
+			bound = new Bounds(transform.position, Vector3.zero);
+			foreach (var c in GetComponentsInChildren<Collider2D>())
+			{
+				bound.Encapsulate(c.bounds);
+			}
+		}
+
+		isMoving = rb.velocity.magnitude > velocityThreshold;
 	}
 
 	private Vector3 GetMouseAsWorldPoint()
 	{
 		Vector3 mousePoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, z);
 		return Camera.main.ScreenToWorldPoint(mousePoint);
+	}
+
+	public Bounds GetBounds()
+	{
+		return bound;
+	}
+
+	public void OnDrawGizmos()
+	{
+		Gizmos.color = isMoving ? Color.red : Color.blue;
+		Gizmos.DrawWireCube(bound.center, bound.size);
+	}
+
+	public bool IsMoving()
+	{
+		return follow || isMoving;
 	}
 }
