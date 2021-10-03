@@ -14,6 +14,9 @@ public class HeightEvent : UnityEvent<float> { }
 [System.Serializable]
 public class TimerEvent : UnityEvent<float, float, bool> { }
 
+[System.Serializable]
+public class LevelWonEvent : UnityEvent<int> { }
+
 public class LevelManager : MonoBehaviour
 {
     public float TargetHeight = 0.0f;
@@ -25,6 +28,7 @@ public class LevelManager : MonoBehaviour
     public DialogEvent dialogEvent;
     public PauseEvent pauseEvent;
     public TimerEvent timerEvent;
+    public LevelWonEvent wonEvent;
 
     public HeightEvent heightEvent;
 
@@ -45,6 +49,9 @@ public class LevelManager : MonoBehaviour
     public bool running = true;
     private bool menuShown = false;
 
+
+    public bool objectsPaused = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +59,7 @@ public class LevelManager : MonoBehaviour
         if(pauseEvent == null) pauseEvent = new PauseEvent();
         if(heightEvent == null) heightEvent = new HeightEvent();
         if(timerEvent == null) timerEvent = new TimerEvent();
+        if(wonEvent == null) wonEvent = new LevelWonEvent();
 
 
         maxHeight = 0;
@@ -64,15 +72,6 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(winTimer > StableTime)
-		{
-            Debug.Log("END LEVEL YOU MORON");
-            if(unlockLevel != -1)
-			{
-                GameController.Instance.UnlockLevel(unlockLevel);
-			}
-            running = false;
-		}
         maxHeight = GetMaxHeight();
 
         heightEvent.Invoke(maxHeight);
@@ -83,6 +82,17 @@ public class LevelManager : MonoBehaviour
 
         if (running)
         {
+            if (winTimer > StableTime)
+            {
+                if (unlockLevel != -1)
+                {
+                    GameController.Instance.UnlockLevel(unlockLevel);
+                }
+                running = false;
+                wonEvent.Invoke(unlockLevel);
+                objectsPaused = true;
+            }
+
             if (!enableWinTimer)
             {
                 if (maxHeight >= TargetHeight)
@@ -120,12 +130,14 @@ public class LevelManager : MonoBehaviour
 	{
         pauseEvent.Invoke(true, false);
         dialogEvent.Invoke(id, true);
+        objectsPaused = true;
 	}
 
     public void PauseLevel(bool pause)
 	{
         pauseEvent.Invoke(pause, false);
         running = !pause;
+        objectsPaused = pause;
 	}
 
     private void LateStart()
@@ -150,5 +162,6 @@ public class LevelManager : MonoBehaviour
         menuShown = !menuShown;
         running = !menuShown;
         pauseEvent.Invoke(menuShown, true);
+        objectsPaused = menuShown;
     }
 }

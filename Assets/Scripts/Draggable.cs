@@ -28,69 +28,87 @@ public class Draggable : MonoBehaviour
 
 	private bool isMoving = false;
 
+	private LevelManager manager;
+
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		manager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
 		rotationAngle = 0.0f;
 	}
 
 	public void OnMouseDown()
 	{
-		z = Camera.main.WorldToScreenPoint(transform.position).z;
-		offset = transform.position - GetMouseAsWorldPoint();
-		mouseLastPos = GetMouseAsWorldPoint();
-		follow = true;
-		//rb.freezeRotation = true;
-		rb.gravityScale = 0f;
-		rotationAngle = transform.rotation.eulerAngles.z;
+		if (!manager.objectsPaused)
+		{
+			z = Camera.main.WorldToScreenPoint(transform.position).z;
+			offset = transform.position - GetMouseAsWorldPoint();
+			mouseLastPos = GetMouseAsWorldPoint();
+			follow = true;
+			//rb.freezeRotation = true;
+			rb.gravityScale = 0f;
+			rotationAngle = transform.rotation.eulerAngles.z;
+		}
 	}
 
 	public void OnMouseDrag()
 	{
-		if (follow) rb.MovePosition(GetMouseAsWorldPoint() + offset);
-
-		mouseCurPos = GetMouseAsWorldPoint();
-		force = mouseCurPos - mouseLastPos;
-		mouseLastPos = mouseCurPos;
+		if (!manager.objectsPaused)
+		{
+			mouseCurPos = GetMouseAsWorldPoint();
+			force = mouseCurPos - mouseLastPos;
+			mouseLastPos = mouseCurPos;
+		}
 	}
 
 	public void OnMouseUp()
 	{
-		follow = false;
-		isThrown = true;
-		//rb.freezeRotation = false;
-		rb.gravityScale = 1f;
+		if (!manager.objectsPaused)
+		{
+			follow = false;
+			isThrown = true;
+			//rb.freezeRotation = false;
+			rb.gravityScale = 1f;
+		}
 	}
 
 	public void FixedUpdate()
 	{
-		if (follow || isThrown)
+		if (!manager.objectsPaused)
 		{
-			rb.velocity = force * 100;
-			isThrown = false;
+			if (follow || isThrown)
+			{
+				rb.MovePosition(GetMouseAsWorldPoint() + offset);
+				rb.velocity = force * 100;
+				isThrown = false;
+
+				rb.MoveRotation(rotationAngle);
+			}
 		}
 	}
 
 	public void Update()
 	{
-		if (follow)
+		if (!manager.objectsPaused)
 		{
-			rotationAngle += Input.mouseScrollDelta.y * RotateSpeed;
-			if (rotationAngle > 360f) rotationAngle -= 360f;
-			rb.MoveRotation(rotationAngle);
-		}
-
-		if (!follow)
-		{
-			//slow?
-			bound = new Bounds(transform.position, Vector3.zero);
-			foreach (var c in GetComponentsInChildren<Collider2D>())
+			if (follow)
 			{
-				bound.Encapsulate(c.bounds);
+				rotationAngle += Input.mouseScrollDelta.y * RotateSpeed;
+				if (rotationAngle > 360f) rotationAngle -= 360f;
 			}
-		}
 
-		isMoving = rb.velocity.magnitude > velocityThreshold;
+			if (!follow)
+			{
+				//slow?
+				bound = new Bounds(transform.position, Vector3.zero);
+				foreach (var c in GetComponentsInChildren<Collider2D>())
+				{
+					bound.Encapsulate(c.bounds);
+				}
+			}
+
+			isMoving = rb.velocity.magnitude > velocityThreshold;
+		}
 	}
 
 	private Vector3 GetMouseAsWorldPoint()

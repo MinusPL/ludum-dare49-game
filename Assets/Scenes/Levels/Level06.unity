@@ -5600,6 +5600,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  wonEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 498971762}
+        m_TargetAssemblyTypeName: GameUIController, Assembly-CSharp
+        m_MethodName: LevelWon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   heightEvent:
     m_PersistentCalls:
       m_Calls:
@@ -5619,6 +5634,9 @@ MonoBehaviour:
   startDialogID: 1
   lineStandardColor: {r: 1, g: 1, b: 1, a: 1}
   lineAboveColor: {r: 0, g: 1, b: 0.07011509, a: 1}
+  unlockLevel: -1
+  running: 1
+  objectsPaused: 0
 --- !u!1 &947374288
 GameObject:
   m_ObjectHideFlags: 0
