@@ -5,13 +5,15 @@ using TMPro;
 
 public class LevelUIManager : MonoBehaviour
 {
+    public TextMeshProUGUI heightText;
+    public Dialog dialog;
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<TextMeshProUGUI>().text = $"Height: {0.0f}";
+        heightText.text = $"Height: {0.0f}";
     }
 
-    // Update is called once per frame
+    // Not used so far.
     void Update()
     {
 
@@ -19,7 +21,6 @@ public class LevelUIManager : MonoBehaviour
         
     public void SetCurrentHeight(float height)
 	{
-        GetComponent<TextMeshProUGUI>().text = $"Height: {height}";
-
+        heightText.text = $"Height: {height}";
     }
 }

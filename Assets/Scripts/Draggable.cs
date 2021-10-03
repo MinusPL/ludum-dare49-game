@@ -28,7 +28,7 @@ public class Draggable : MonoBehaviour
 
 	private bool isMoving = false;
 
-	private void Start()
+	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		rotationAngle = 0.0f;
@@ -113,5 +113,16 @@ public class Draggable : MonoBehaviour
 	public bool IsMoving()
 	{
 		return follow || isMoving;
+	}
+
+	public void SetParams(Vector3 position, Vector3 offsetParam, Vector3 mouseLP, bool followParam, float zParam)
+	{
+		transform.position = new Vector3(position.x, position.y, zParam);
+		z = zParam;
+		offset = offsetParam;
+		mouseLastPos = mouseLP;
+		follow = followParam;
+		if(followParam) rb.gravityScale = 0f;
+		rotationAngle = transform.rotation.eulerAngles.z;
 	}
 }
