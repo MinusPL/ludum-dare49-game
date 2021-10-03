@@ -29,6 +29,8 @@ public class Dialog : MonoBehaviour
     StringData currentData;
 
     public Image img;
+
+    private bool paused;
     
     // Start is called before the first frame update
     void Start()
@@ -40,56 +42,59 @@ public class Dialog : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!paused)
         {
-            if (typeText)
+            if (Input.GetMouseButtonDown(0))
             {
-                typeText = false;
-                currentText = textToSet;
-                textObj.text = currentText;
-                marker.SetActive(true);
-            }
-            else
-            {
-                if (currentData != null && currentData.nextId != -1)
-                {
-                    SetText(currentData.nextId, true);
-                }
-                else
-                {
-                    gameObject.SetActive(false);
-                    dialogUnpause.Invoke(false);
-                }
-            }
-        }
-
-        if (typeText)
-		{
-            if(letterTimer >= letterTime)
-			{
-                if (textPos > textToSet.Length - 1)
+                if (typeText)
                 {
                     typeText = false;
+                    currentText = textToSet;
+                    textObj.text = currentText;
                     marker.SetActive(true);
                 }
                 else
                 {
-                    if (textToSet[textPos] != '<')
-                        currentText += $"{textToSet[textPos++]}";
+                    if (currentData != null && currentData.nextId != -1)
+                    {
+                        SetText(currentData.nextId, true);
+                    }
                     else
                     {
-                        while (textToSet[textPos] != '>')
-                        {
-                            currentText += $"{textToSet[textPos++]}";
-                        }
-                        currentText += $"{textToSet[textPos++]}";
+                        gameObject.SetActive(false);
+                        dialogUnpause.Invoke(false);
                     }
                 }
-                textObj.text = currentText;
-                letterTimer = 0.0f;
             }
-            letterTimer += Time.deltaTime;
-		}
+
+            if (typeText)
+            {
+                if (letterTimer >= letterTime)
+                {
+                    if (textPos > textToSet.Length - 1)
+                    {
+                        typeText = false;
+                        marker.SetActive(true);
+                    }
+                    else
+                    {
+                        if (textToSet[textPos] != '<')
+                            currentText += $"{textToSet[textPos++]}";
+                        else
+                        {
+                            while (textToSet[textPos] != '>')
+                            {
+                                currentText += $"{textToSet[textPos++]}";
+                            }
+                            currentText += $"{textToSet[textPos++]}";
+                        }
+                    }
+                    textObj.text = currentText;
+                    letterTimer = 0.0f;
+                }
+                letterTimer += Time.deltaTime;
+            }
+        }
     }
 
     public void SetText(string text, bool typing)
@@ -127,5 +132,10 @@ public class Dialog : MonoBehaviour
                 break;
 		}
         SetText(currentData.data, typing);
+	}
+
+	public void OnMenuPause(bool pause, bool menu)
+    {
+        if (menu) paused = pause;
 	}
 }

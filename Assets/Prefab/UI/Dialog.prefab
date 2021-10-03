@@ -397,7 +397,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textObj: {fileID: 1984416917090982395}
   marker: {fileID: 1984416918106062884}
+  database: {fileID: 0}
+  dialogUnpause:
+    m_PersistentCalls:
+      m_Calls: []
   letterTime: 0.05
+  img: {fileID: 1984416918485648494}
 --- !u!1 &1984416918173760484
 GameObject:
   m_ObjectHideFlags: 0

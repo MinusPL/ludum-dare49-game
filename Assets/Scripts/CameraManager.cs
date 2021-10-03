@@ -29,7 +29,7 @@ public class CameraManager : MonoBehaviour
 		}
 	}
 
-	public void SetPaused(bool pause)
+	public void SetPaused(bool pause, bool menu)
 	{
 		paused = pause;
 	}
