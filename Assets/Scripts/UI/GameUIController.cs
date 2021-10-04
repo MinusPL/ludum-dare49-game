@@ -45,7 +45,7 @@ public class GameUIController : MonoBehaviour
         nextLevel = nLevel;
         if (nLevel == -1)
         {
-            levelText.text = "That was last level!";
+            levelText.text = "This is the last level!";
             nextLevelButton.GetComponent<Button>().interactable = false;
         }
         levelWon.SetActive(true);
