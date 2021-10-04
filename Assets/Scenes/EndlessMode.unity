@@ -5139,7 +5139,7 @@ PrefabInstance:
     - target: {fileID: 451415856864899203, guid: b918693df85c774459347c20df3c7cd0, type: 3}
       propertyPath: dialogUnpause.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 911848808}
     - target: {fileID: 451415856864899203, guid: b918693df85c774459347c20df3c7cd0, type: 3}
       propertyPath: dialogUnpause.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -5150,7 +5150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 451415856864899203, guid: b918693df85c774459347c20df3c7cd0, type: 3}
       propertyPath: dialogUnpause.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelManager, Assembly-CSharp
+      value: EndlessModeManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 451415856864899203, guid: b918693df85c774459347c20df3c7cd0, type: 3}
       propertyPath: dialogUnpause.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5665,7 +5665,7 @@ MonoBehaviour:
   startDialogID: 0
   spawner: {fileID: 551767498}
   objectsToSpawn:
-  - {fileID: 2062689932653631238, guid: f2c7533bc8c68d84fbc2131d01c0754d, type: 3}
+  - {fileID: 2062689932653631238, guid: f767dbd72424efc4994d254203223e38, type: 3}
 --- !u!1 &947374288
 GameObject:
   m_ObjectHideFlags: 0
