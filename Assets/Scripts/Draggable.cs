@@ -22,6 +22,7 @@ public class Draggable : MonoBehaviour
 	private Rigidbody2D rb;
 
 	public float RotateSpeed = 10.0f;
+	public float RotateSpeedKey = 80.0f;
 
 	private float rotationAngle;
 
@@ -111,6 +112,17 @@ public class Draggable : MonoBehaviour
 					rotationAngle += Input.mouseScrollDelta.y * RotateSpeed;
 					if (rotationAngle > 360f) rotationAngle -= 360f;
 					scrollDelta = 0.0f;
+				}
+				if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+				{
+					rotationAngle += 1 * RotateSpeedKey * Time.deltaTime;
+					if (rotationAngle > 360f) rotationAngle -= 360f;
+				}
+				
+				if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+				{
+					rotationAngle += -1 * RotateSpeedKey * Time.deltaTime;
+					if (rotationAngle > 360f) rotationAngle -= 360f;
 				}
 			}
 
