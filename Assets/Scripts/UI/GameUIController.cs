@@ -50,4 +50,9 @@ public class GameUIController : MonoBehaviour
         }
         levelWon.SetActive(true);
 	}
+
+    public void SaveSettings()
+	{
+        GameController.Instance.SaveData();
+	}
 }

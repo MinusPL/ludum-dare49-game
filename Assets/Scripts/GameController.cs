@@ -51,9 +51,9 @@ public class GameController : MonoBehaviour
                 BinaryReader br = new BinaryReader(file);
 
                 _levelUnlockedFlags = br.ReadInt32();
-                float a = (float)br.ReadInt32();
-                float b = (float)br.ReadInt32();
-                float c = (float)br.ReadInt32();
+                masterVolume = br.ReadSingle();
+                musicVolume = br.ReadSingle();
+                soundVolume = br.ReadSingle();
             }
 		}
 		else
@@ -68,9 +68,39 @@ public class GameController : MonoBehaviour
             BinaryWriter bw = new BinaryWriter(file);
 
             bw.Write(_levelUnlockedFlags);
-            bw.Write(0.0f);
-            bw.Write(0.0f);
-            bw.Write(0.0f);
+            bw.Write(masterVolume);
+            bw.Write(musicVolume);
+            bw.Write(soundVolume);
         }
+    }
+
+    public void SetVolume(int slider, float val)
+	{
+        switch(slider)
+		{
+            case 0:
+                masterVolume = val;
+                break;
+            case 1:
+                musicVolume = val;
+                break;
+            case 2:
+                soundVolume = val;
+                break;
+        }
+	}
+
+    public float GetVolume(int slider)
+	{
+        switch (slider)
+        {
+            case 0:
+                return masterVolume;
+            case 1:
+                return musicVolume;
+            case 2:
+                return soundVolume;
+        }
+        return 0;
     }
 }
