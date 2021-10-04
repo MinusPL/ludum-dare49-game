@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class Draggable : MonoBehaviour
 {
 	private Vector3 offset;
@@ -32,9 +33,19 @@ public class Draggable : MonoBehaviour
 
 	private float scrollDelta = 0.0f;
 
+	private AudioSource ass;
+
+	public float audioTime = 5.0f;
+	private float audioTimer = 0.0f;
+
+	public float soundVelocity = 1.0f;
+
+	private bool audioLaunched = false;
+
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		ass = GetComponent<AudioSource>();
 		manager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
 		rotationAngle = 0.0f;
 	}
@@ -114,6 +125,32 @@ public class Draggable : MonoBehaviour
 			}
 
 			isMoving = rb.velocity.magnitude > velocityThreshold;
+
+			Debug.Log(rb.velocity.magnitude);
+			if (!audioLaunched)
+			{
+				if (rb.velocity.magnitude >= soundVelocity)
+				{
+					if(Random.Range(1, 10000) > 9000)
+					{
+						ass.Play();
+						audioLaunched = true;
+					}
+				}
+			}
+			else
+			{
+				if(!ass.isPlaying)
+				{
+					if(audioTimer >= audioTime)
+					{
+						audioLaunched = false;
+						audioTimer = 0.0f;
+					}
+					else audioTimer += Time.deltaTime;
+				}
+			}
+
 		}
 	}
 
