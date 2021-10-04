@@ -30,6 +30,8 @@ public class Draggable : MonoBehaviour
 
 	private LevelManager manager;
 
+	private float scrollDelta = 0.0f;
+
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
@@ -93,8 +95,12 @@ public class Draggable : MonoBehaviour
 		{
 			if (follow)
 			{
-				rotationAngle += Input.mouseScrollDelta.y * RotateSpeed;
-				if (rotationAngle > 360f) rotationAngle -= 360f;
+				if (scrollDelta != 0)
+				{
+					rotationAngle += Input.mouseScrollDelta.y * RotateSpeed;
+					if (rotationAngle > 360f) rotationAngle -= 360f;
+					scrollDelta = 0.0f;
+				}
 			}
 
 			if (!follow)
@@ -133,6 +139,14 @@ public class Draggable : MonoBehaviour
 		return follow || isMoving;
 	}
 
+	public void OnGUI()
+	{
+		if (Event.current.type == EventType.ScrollWheel)
+		{
+			scrollDelta = Event.current.delta.y;
+			Debug.Log(Event.current.delta);
+		}
+	}
 	public void SetParams(Vector3 position, Vector3 offsetParam, Vector3 mouseLP, bool followParam, float zParam)
 	{
 		transform.position = new Vector3(position.x, position.y, zParam);

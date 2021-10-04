@@ -15,6 +15,10 @@ public class GameController : MonoBehaviour
 
     private int _levelUnlockedFlags = 1;
 
+    private float masterVolume = 1.0f;
+    private float soundVolume = 1.0f;
+    private float musicVolume = 1.0f;
+
     private void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
