@@ -5283,7 +5283,7 @@ MonoBehaviour:
   boundary: 50
   cameraSpeed: 5
   fastSpeed: 20
-  upperLimit: 100
+  upperLimit: 10000
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -5665,7 +5665,19 @@ MonoBehaviour:
   startDialogID: 0
   spawner: {fileID: 551767498}
   objectsToSpawn:
+  - {fileID: 245270333103312894, guid: 780274dbd0387c84896eaa6c6277f47d, type: 3}
+  - {fileID: 245270333103312894, guid: dbe0ddf92982de54e8898ca81d1ddd16, type: 3}
+  - {fileID: 245270333103312894, guid: 4ea6cc38cd1c2324a95afc9dcde904cf, type: 3}
+  - {fileID: 245270333103312894, guid: 9d55859eec55d944183aa04e7d535305, type: 3}
+  - {fileID: 245270333103312894, guid: 49691e93bb62b7448aeb933ee959e39c, type: 3}
+  - {fileID: 245270333103312894, guid: de8f5345f3f9aa84c9339e2254f4c3d7, type: 3}
+  - {fileID: 245270333103312894, guid: 8edced2a422680c4a8b4e50be4fbf6e7, type: 3}
+  - {fileID: 245270333103312894, guid: 95625cc318e0b4b4c9dbe3627ba9e4b2, type: 3}
+  - {fileID: 245270333103312894, guid: 7aa8d1fb17ae61f47bf9e8a633901112, type: 3}
+  - {fileID: 245270333103312894, guid: 5e4f61861709ab242a011687c2f00b94, type: 3}
+  - {fileID: 245270333103312894, guid: add6ae1de43bd8d43a15227bb5ec7e73, type: 3}
   - {fileID: 2062689932653631238, guid: f767dbd72424efc4994d254203223e38, type: 3}
+  objectsPaused: 0
 --- !u!1 &947374288
 GameObject:
   m_ObjectHideFlags: 0

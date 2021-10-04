@@ -5,10 +5,13 @@ using UnityEngine;
 public class CollectableEndlessMode : MonoBehaviour
 {
     public GameObject blockToSpawn;
+    
+    private EndlessModeManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
+        manager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<EndlessModeManager>();
     }
 
     // Update is called once per frame
@@ -19,14 +22,17 @@ public class CollectableEndlessMode : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-        float z = Camera.main.WorldToScreenPoint(transform.position).z;
-        Vector3 offset = transform.position - GetMouseAsWorldPoint(z);
-        Vector3 mouseLastPos = GetMouseAsWorldPoint(z);
+        if (!manager.objectsPaused)
+        {
+            float z = Camera.main.WorldToScreenPoint(transform.position).z;
+            Vector3 offset = transform.position - GetMouseAsWorldPoint(z);
+            Vector3 mouseLastPos = GetMouseAsWorldPoint(z);
 
-        var obj = Instantiate(blockToSpawn);
-        obj.GetComponent<Draggable>().SetParams(transform.position, offset, mouseLastPos, false, 0.0f);
+            var obj = Instantiate(blockToSpawn);
+            obj.GetComponent<DraggableEndless>().SetParams(transform.position, offset, mouseLastPos, false, 0.0f);
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 
     private Vector3 GetMouseAsWorldPoint(float z)

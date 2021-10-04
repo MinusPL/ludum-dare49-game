@@ -20,6 +20,8 @@ public class EndlessModeManager : MonoBehaviour
 
     public GameObject spawner;
     public GameObject[] objectsToSpawn;
+    
+    public bool objectsPaused = false;
 
     // Start is called before the first frame update
     void Start()
@@ -60,11 +62,13 @@ public class EndlessModeManager : MonoBehaviour
 	{
         pauseEvent.Invoke(true, false);
         dialogEvent.Invoke(id, true);
+        objectsPaused = true;
     }
 
     public void PauseLevel(bool pause)
 	{
         pauseEvent.Invoke(pause, false);
+        objectsPaused = pause;
     }
 
     private void LateStart()
@@ -78,8 +82,8 @@ public class EndlessModeManager : MonoBehaviour
         float maxHeight = 0.0f;
         foreach (var obj in objects)
         {
-            if(!obj.GetComponent<Draggable>().IsMoving())
-                maxHeight = maxHeight < obj.GetComponent<Draggable>().GetBounds().max.y ? obj.GetComponent<Draggable>().GetBounds().max.y : maxHeight;
+            if(!obj.GetComponent<DraggableEndless>().IsMoving())
+                maxHeight = maxHeight < obj.GetComponent<DraggableEndless>().GetBounds().max.y ? obj.GetComponent<DraggableEndless>().GetBounds().max.y : maxHeight;
         }
         return maxHeight;
     }
@@ -88,5 +92,6 @@ public class EndlessModeManager : MonoBehaviour
 	{
         menuShown = !menuShown;
         pauseEvent.Invoke(menuShown, true);
+        objectsPaused = menuShown;
     }
 }
