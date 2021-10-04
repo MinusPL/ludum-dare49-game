@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775ecc5f2ccbb9840acc17cbcd3e7771, type: 3}
+  m_Name: L14Ln1(34)
+  m_EditorClassIdentifier: 
+  id: 34
+  nextId: 35
+  image: {fileID: 21300000, guid: 1488894f0ea80b248ba6967d7e35a8de, type: 3}
+  imageSize: 0
+  data: 'Thank you for coming on such a short notice, detective. As the
+
+    message
+    specified, there''s been a murder in the guest room,
+
+    on the second floor.
+    The victim was a friend of the family.
+
+    I was the one to find the body. Please,
+    come in. I will be here
+
+    if you have any questions.'

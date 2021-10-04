@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775ecc5f2ccbb9840acc17cbcd3e7771, type: 3}
+  m_Name: L5Ln2(15)
+  m_EditorClassIdentifier: 
+  id: 15
+  nextId: 16
+  image: {fileID: 21300000, guid: d5e655871d877ad4bbc1d2de1f5e4b03, type: 3}
+  imageSize: 1
+  data: 'This is an <b>Onigiri</b>. A very popular lunch item in certain parts
+
+    of
+    the world. They''re filled with all kinds of stuff from
+
+    just salt to tuna.
+    But you don''t care about nutrition, do you?'
