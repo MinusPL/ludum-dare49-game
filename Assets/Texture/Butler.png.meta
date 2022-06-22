@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -304,6 +305,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Butler_0: -6582193064802716715
+      Butler_1: -5354158706824179416
+      Butler_2: 7345403878664591816
+      Butler_3: 8888259721298855873
+      Butler_5: 2509459432351763916
+      Butler_7: 2883939252096736571
+      Butler_4: 4905300953310956982
+      Butler_6: 5301404274602225055
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -72,6 +72,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Level20.unity
     guid: 6cd6df4ed5b01ae4c9e9565d6e35ac81
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/EndlessMode.unity
+    guid: 3dbeb1d2e74422548b9551ce36642671
   m_configObjects: {}

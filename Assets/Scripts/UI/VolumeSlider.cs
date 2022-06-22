@@ -12,7 +12,7 @@ public class VolumeSlider : MonoBehaviour
 
     public int sliderNum = 0;
 
-	public void Start()
+	public void Awake()
 	{
 		GetComponent<Slider>().value = GameController.Instance.GetVolume(sliderNum);
 	}

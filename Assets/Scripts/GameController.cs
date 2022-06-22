@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public AudioMixer mixer;
+
     public static GameController Instance
     {
         get;
@@ -28,6 +31,9 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        mixer.SetFloat("MasterVolume", Mathf.Log10(masterVolume) * 20.0f);
+        mixer.SetFloat("MusicVolume", Mathf.Log10(musicVolume) * 20.0f);
+        mixer.SetFloat("SoundsVolume", Mathf.Log10(soundVolume) * 20.0f);
         SceneManager.LoadScene(1);
     }
 
